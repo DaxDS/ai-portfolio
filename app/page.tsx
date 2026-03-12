@@ -177,6 +177,118 @@ const PROJECT_SECTIONS = [
   },
 ];
 
+type ChatMessage = {
+  role: "user" | "assistant";
+  content: string;
+};
+
+function CyberAICopilotDemo() {
+  const [messages, setMessages] = useState<ChatMessage[]>([
+    {
+      role: "assistant",
+      content:
+        "Hi, I’m your AI SOC copilot. Paste an alert or incident summary and I’ll triage it, enrich it, and suggest next steps.",
+    },
+  ]);
+  const [input, setInput] = useState("");
+  const [isThinking, setIsThinking] = useState(false);
+  const endRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    endRef.current?.scrollIntoView({ behavior: "smooth", block: "end" });
+  }, [messages.length]);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    const trimmed = input.trim();
+    if (!trimmed || isThinking) return;
+
+    const userMessage: ChatMessage = { role: "user", content: trimmed };
+    const nextMessages = [...messages, userMessage];
+    setMessages(nextMessages);
+    setInput("");
+    setIsThinking(true);
+
+    try {
+      const res = await fetch("/api/soc-copilot", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ messages: nextMessages }),
+      });
+      const data = await res.json();
+
+      if (!res.ok) {
+        setMessages((prev) => [
+          ...prev,
+          { role: "assistant", content: `Error: ${data?.error ?? res.statusText}. Try again.` },
+        ]);
+        return;
+      }
+      setMessages((prev) => [
+        ...prev,
+        { role: "assistant", content: data.message ?? "No response." },
+      ]);
+    } catch (err) {
+      setMessages((prev) => [
+        ...prev,
+        { role: "assistant", content: "Network error. Check the console and try again." },
+      ]);
+    } finally {
+      setIsThinking(false);
+    }
+  };
+
+  return (
+    <div className="security-card p-6 rounded-xl mb-8">
+      <h4 className="text-xl font-semibold text-zinc-100 mb-2">
+        AI SOC Copilot – Tier‑1 Triage Demo
+      </h4>
+      <p className="text-sm text-zinc-500 mb-4">
+        This is a front-end demo of the SOC copilot I&apos;m building: paste an alert/incident summary and see how it would respond.
+        The production version connects directly to SIEM/XDR, threat intel, and asset data for fully evidence-backed decisions.
+      </p>
+      <div className="h-64 md:h-72 rounded-lg bg-zinc-950/60 border border-amber-500/15 flex flex-col overflow-hidden">
+        <div className="flex-1 overflow-y-auto px-4 py-3 space-y-3 text-sm">
+          {messages.map((m, idx) => (
+            <div
+              key={idx}
+              className={`max-w-full md:max-w-[85%] whitespace-pre-line ${
+                m.role === "user"
+                  ? "ml-auto bg-amber-500/15 border border-amber-500/30 rounded-lg px-3 py-2 text-amber-50"
+                  : "mr-auto bg-zinc-900/80 border border-zinc-700/80 rounded-lg px-3 py-2 text-zinc-100"
+              }`}
+            >
+              {m.content}
+            </div>
+          ))}
+          {isThinking && (
+            <div className="mr-auto bg-zinc-900/80 border border-zinc-700/80 rounded-lg px-3 py-2 text-zinc-400 text-xs font-mono">
+              Thinking like a Tier‑1 analyst…
+            </div>
+          )}
+          <div ref={endRef} />
+        </div>
+        <form onSubmit={handleSubmit} className="border-t border-zinc-800/80 px-3 py-2 flex gap-2">
+          <input
+            type="text"
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            placeholder="e.g., Sentinel: impossible travel sign-in from Brazil and Germany within 30 minutes…"
+            className="flex-1 bg-transparent text-sm text-zinc-100 placeholder:text-zinc-600 outline-none"
+          />
+          <button
+            type="submit"
+            disabled={isThinking || !input.trim()}
+            className="px-3 py-1.5 text-xs md:text-sm rounded-md bg-amber-500/80 hover:bg-amber-400 text-zinc-950 font-mono font-semibold disabled:opacity-40 disabled:cursor-not-allowed"
+          >
+            Send
+          </button>
+        </form>
+      </div>
+    </div>
+  );
+}
+
 export default function Home() {
   const [scrolled, setScrolled] = useState(false);
 
@@ -342,6 +454,9 @@ export default function Home() {
             <div key={id} id={id} className="mb-16 scroll-mt-24">
               <h3 className="text-2xl font-semibold text-amber-200/90 mb-2 font-mono">{name}</h3>
               <p className="text-zinc-500 text-sm mb-6">{desc}</p>
+              {id === "ai-powered-cybersecurity" && (
+                <CyberAICopilotDemo />
+              )}
               <div className="grid md:grid-cols-2 gap-6">
                 {GITHUB_PROJECTS.filter((p) => p.section === name).length > 0 ? (
                   GITHUB_PROJECTS.filter((p) => p.section === name).map((project) => (
@@ -411,7 +526,9 @@ export default function Home() {
             LinkedIn
           </a>
         </div>
-        <p className="mt-16 text-zinc-600 text-sm font-mono">Designed & built by Daksh Patel</p>
+        <p className="mt-16 text-white/95 text-sm font-medium font-mono [text-shadow:0_0_24px_rgba(0,0,0,0.9),0_1px_2px_rgba(0,0,0,0.8)]">
+          Designed & built by Daksh Patel
+        </p>
       </section>
     </main>
   );
