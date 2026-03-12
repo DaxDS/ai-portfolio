@@ -513,7 +513,7 @@ export default function Home() {
           <span className="section-badge font-mono">04.</span>{" "}
             <span className="section-title">Contact</span>
         </h2>
-        <p className="text-zinc-400 mb-12 text-center max-w-md text-lg">
+        <p className="text-zinc-400 mb-12 text-center max-w-md text-lg font-medium">
           Have a project in mind? Let&apos;s build something intelligent together.
         </p>
         <div className="security-card p-8 rounded-xl flex flex-wrap justify-center gap-8 text-lg max-w-xl">
