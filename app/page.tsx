@@ -457,7 +457,7 @@ export default function Home() {
             <span className="section-badge font-mono">03.</span>{" "}
             <span className="section-title">Projects</span>
           </h2>
-          <p className="text-zinc-400 text-center text-lg mb-16 max-w-2xl mx-auto">
+          <p className="text-zinc-400 text-center text-lg mb-16 max-w-2xl mx-auto font-medium">
             Open-source projects from my{" "}
             <a href="https://github.com/DaxDS" target="_blank" rel="noopener noreferrer" className="text-amber-200/90 hover:text-amber-100 font-mono">
               GitHub
