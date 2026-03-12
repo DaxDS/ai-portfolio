@@ -463,10 +463,9 @@ export default function Home() {
               GitHub
             </a>
           </p>
-          {PROJECT_SECTIONS.map(({ name, id, desc }) => (
+          {PROJECT_SECTIONS.map(({ name, id }) => (
             <div key={id} id={id} className="mb-16 scroll-mt-24">
-              <h3 className="text-2xl font-semibold text-amber-200/90 mb-2 font-mono">{name}</h3>
-              <p className="text-zinc-500 text-sm mb-6">{desc}</p>
+              <h3 className="text-2xl font-semibold text-amber-200/90 mb-6 font-mono">{name}</h3>
               {id === "ai-powered-cybersecurity" && (
                 <CyberAICopilotDemo />
               )}
@@ -544,7 +543,7 @@ export default function Home() {
           </a>
         </div>
         <p className="mt-16 text-center">
-          <span className="inline-block px-5 py-2.5 rounded-full bg-zinc-950/90 border border-amber-500/30 text-amber-100 text-sm font-semibold tracking-wide font-sans backdrop-blur-sm shadow-[0_0_24px_rgba(0,0,0,0.5)]">
+          <span className="security-card inline-block px-6 py-3 rounded-xl text-amber-100/95 text-sm font-medium tracking-wide font-mono">
             Designed & built by Daksh Patel
           </span>
         </p>
