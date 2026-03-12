@@ -500,9 +500,7 @@ export default function Home() {
                       </p>
                     </div>
                   ))
-                ) : (
-                  <p className="text-zinc-500 py-8 italic">More projects coming soon.</p>
-                )}
+                ) : null}
               </div>
             </div>
           ))}
@@ -542,10 +540,8 @@ export default function Home() {
             LinkedIn
           </a>
         </div>
-        <p className="mt-16 text-center">
-          <span className="security-card inline-block px-6 py-3 rounded-xl text-amber-100/95 text-sm font-medium tracking-wide font-mono">
-            Designed & built by Daksh Patel
-          </span>
+        <p className="mt-16 text-center text-white font-semibold text-sm tracking-wide font-mono">
+          Designed & built by Daksh Patel
         </p>
       </section>
     </main>
