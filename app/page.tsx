@@ -459,7 +459,7 @@ export default function Home() {
           </h2>
           <p className="text-zinc-300 text-center text-lg mb-16 max-w-2xl mx-auto font-medium">
             Open-source projects from my{" "}
-            <a href="https://github.com/DaxDS" target="_blank" rel="noopener noreferrer" className="text-amber-200/90 hover:text-amber-100 font-medium">
+            <a href="https://github.com/DaxDS" target="_blank" rel="noopener noreferrer" className="text-zinc-300 hover:text-amber-200 font-medium transition-colors">
               GitHub
             </a>
           </p>
