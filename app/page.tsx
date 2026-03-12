@@ -292,6 +292,19 @@ function CyberAICopilotDemo() {
 export default function Home() {
   const [scrolled, setScrolled] = useState(false);
 
+  // When opening the root URL (no hash), always start at the top so the hero shows first
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    window.history.scrollRestoration = "manual";
+    const hash = window.location.hash;
+    if (!hash || hash === "#") {
+      window.scrollTo(0, 0);
+      // Run again after paint to override browser scroll restoration (e.g. on Vercel)
+      const t = setTimeout(() => window.scrollTo(0, 0), 0);
+      return () => clearTimeout(t);
+    }
+  }, []);
+
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 100);
     window.addEventListener("scroll", handleScroll);
@@ -460,11 +473,8 @@ export default function Home() {
               <div className="grid md:grid-cols-2 gap-6">
                 {GITHUB_PROJECTS.filter((p) => p.section === name).length > 0 ? (
                   GITHUB_PROJECTS.filter((p) => p.section === name).map((project) => (
-                    <a
+                    <div
                       key={project.repo}
-                      href={project.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
                       className="security-card block p-6 rounded-xl transition-all group"
                     >
                       <div className="flex items-start justify-between gap-4">
@@ -480,9 +490,16 @@ export default function Home() {
                         ))}
                       </div>
                       <p className="mt-3 text-sm text-zinc-500 group-hover:text-amber-200/90 font-mono">
-                        View code →
+                        <a
+                          href={project.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1 hover:text-amber-200 transition-colors focus:outline-none focus:ring-2 focus:ring-amber-500/50 rounded"
+                        >
+                          View code <span aria-hidden>→</span>
+                        </a>
                       </p>
-                    </a>
+                    </div>
                   ))
                 ) : (
                   <p className="text-zinc-500 py-8 italic">More projects coming soon.</p>
@@ -526,8 +543,10 @@ export default function Home() {
             LinkedIn
           </a>
         </div>
-        <p className="mt-16 text-white/95 text-sm font-medium font-mono [text-shadow:0_0_24px_rgba(0,0,0,0.9),0_1px_2px_rgba(0,0,0,0.8)]">
-          Designed & built by Daksh Patel
+        <p className="mt-16 text-center">
+          <span className="inline-block bg-gradient-to-r from-amber-200 via-orange-200 to-amber-100 bg-clip-text text-transparent text-base font-semibold tracking-wide font-sans [text-shadow:0_0_20px_rgba(251,191,36,0.2),0_2px_4px_rgba(0,0,0,0.8)]">
+            Designed & built by Daksh Patel
+          </span>
         </p>
       </section>
     </main>
