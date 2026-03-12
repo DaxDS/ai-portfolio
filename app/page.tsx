@@ -457,9 +457,9 @@ export default function Home() {
             <span className="section-badge font-mono">03.</span>{" "}
             <span className="section-title">Projects</span>
           </h2>
-          <p className="text-zinc-400 text-center text-lg mb-16 max-w-2xl mx-auto font-medium">
+          <p className="text-zinc-300 text-center text-lg mb-16 max-w-2xl mx-auto font-medium">
             Open-source projects from my{" "}
-            <a href="https://github.com/DaxDS" target="_blank" rel="noopener noreferrer" className="text-amber-200/90 hover:text-amber-100 font-mono">
+            <a href="https://github.com/DaxDS" target="_blank" rel="noopener noreferrer" className="text-amber-200/90 hover:text-amber-100 font-medium">
               GitHub
             </a>
           </p>
@@ -513,7 +513,7 @@ export default function Home() {
           <span className="section-badge font-mono">04.</span>{" "}
             <span className="section-title">Contact</span>
         </h2>
-        <p className="text-zinc-400 mb-12 text-center max-w-md text-lg font-medium">
+        <p className="text-zinc-300 mb-12 text-center max-w-md text-lg font-medium">
           Have a project in mind? Let&apos;s build something intelligent together.
         </p>
         <div className="security-card p-8 rounded-xl flex flex-wrap justify-center gap-8 text-lg max-w-xl">
