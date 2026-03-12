@@ -544,7 +544,7 @@ export default function Home() {
           </a>
         </div>
         <p className="mt-16 text-center">
-          <span className="inline-block bg-gradient-to-r from-amber-200 via-orange-200 to-amber-100 bg-clip-text text-transparent text-base font-semibold tracking-wide font-sans [text-shadow:0_0_20px_rgba(251,191,36,0.2),0_2px_4px_rgba(0,0,0,0.8)]">
+          <span className="inline-block px-5 py-2.5 rounded-full bg-zinc-950/90 border border-amber-500/30 text-amber-100 text-sm font-semibold tracking-wide font-sans backdrop-blur-sm shadow-[0_0_24px_rgba(0,0,0,0.5)]">
             Designed & built by Daksh Patel
           </span>
         </p>
