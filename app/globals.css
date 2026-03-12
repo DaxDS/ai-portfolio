@@ -25,6 +25,11 @@
   scroll-behavior: smooth;
 }
 
+/* Prevent section headings from sitting under fixed nav on mobile */
+section[id] {
+  scroll-margin-top: 5.5rem;
+}
+
 body {
   background: var(--background);
   color: var(--foreground);

@@ -268,18 +268,18 @@ function CyberAICopilotDemo() {
           )}
           <div ref={endRef} />
         </div>
-        <form onSubmit={handleSubmit} className="border-t border-zinc-800/80 px-3 py-2 flex gap-2">
+        <form onSubmit={handleSubmit} className="border-t border-zinc-800/80 px-3 py-2 flex flex-col sm:flex-row gap-2">
           <input
             type="text"
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            placeholder="e.g., Sentinel: impossible travel sign-in from Brazil and Germany within 30 minutes…"
-            className="flex-1 bg-transparent text-sm text-zinc-100 placeholder:text-zinc-600 outline-none"
+            placeholder="Paste an alert or incident summary…"
+            className="flex-1 min-w-0 bg-transparent text-sm text-zinc-100 placeholder:text-zinc-600 outline-none py-2.5 sm:py-1.5"
           />
           <button
             type="submit"
             disabled={isThinking || !input.trim()}
-            className="px-3 py-1.5 text-xs md:text-sm rounded-md bg-amber-500/80 hover:bg-amber-400 text-zinc-950 font-mono font-semibold disabled:opacity-40 disabled:cursor-not-allowed"
+            className="px-4 py-3 sm:py-1.5 rounded-md bg-amber-500/80 hover:bg-amber-400 text-zinc-950 font-mono font-semibold disabled:opacity-40 disabled:cursor-not-allowed min-h-[44px] shrink-0"
           >
             Send
           </button>
@@ -289,8 +289,19 @@ function CyberAICopilotDemo() {
   );
 }
 
+const NAV_LINKS = [
+  { href: "#about", label: "About" },
+  { href: "#ai-agents-and-intelligent-systems", label: "AI Agents" },
+  { href: "#ai-powered-cybersecurity", label: "Cybersecurity" },
+  { href: "#ai-applications", label: "Applications" },
+  { href: "#computer-vision", label: "Vision" },
+  { href: "#ai-experiments-research", label: "Research" },
+  { href: "#contact", label: "Contact" },
+];
+
 export default function Home() {
   const [scrolled, setScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   // When opening the root URL (no hash), always start at the top so the hero shows first
   useEffect(() => {
@@ -311,6 +322,7 @@ export default function Home() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const closeMenu = () => setMenuOpen(false);
 
   return (
     <main className="relative w-full min-h-screen text-zinc-100 overflow-x-hidden">
@@ -344,39 +356,67 @@ export default function Home() {
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 border-b ${
           scrolled
             ? "bg-zinc-950/85 backdrop-blur-md py-3 border-zinc-800/50"
-            : "bg-transparent py-6 border-transparent"
+            : "bg-transparent py-4 md:py-6 border-transparent"
         }`}
       >
-        <div className="max-w-6xl mx-auto px-6 flex justify-between items-center">
-          <span className="text-xl font-semibold tracking-tight font-mono text-amber-200/90">daksh.ai</span>
-          <div className="flex flex-wrap gap-6 text-sm text-zinc-400">
-            <a href="#about" className="nav-link hover:text-amber-200 transition-colors">About</a>
-            <a href="#ai-agents-and-intelligent-systems" className="nav-link hover:text-amber-200 transition-colors">AI Agents</a>
-            <a href="#ai-powered-cybersecurity" className="nav-link hover:text-amber-200 transition-colors">Cybersecurity</a>
-            <a href="#ai-applications" className="nav-link hover:text-orange-200/90 transition-colors">Applications</a>
-            <a href="#computer-vision" className="nav-link hover:text-amber-200 transition-colors">Vision</a>
-            <a href="#ai-experiments-research" className="nav-link hover:text-orange-200/90 transition-colors">Research</a>
-            <a href="#contact" className="nav-link hover:text-amber-200 transition-colors">Contact</a>
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 flex justify-between items-center">
+          <a href="#" className="text-lg sm:text-xl font-semibold tracking-tight font-mono text-amber-200/90" onClick={closeMenu}>daksh.ai</a>
+          {/* Desktop nav */}
+          <div className="hidden md:flex flex-wrap gap-6 text-sm text-zinc-400">
+            {NAV_LINKS.map(({ href, label }) => (
+              <a key={href} href={href} className="nav-link hover:text-amber-200 transition-colors">{label}</a>
+            ))}
           </div>
+          {/* Mobile menu button */}
+          <button
+            type="button"
+            onClick={() => setMenuOpen((o) => !o)}
+            className="md:hidden p-2 -mr-2 text-zinc-400 hover:text-amber-200 transition-colors rounded-lg min-h-[44px] min-w-[44px] flex items-center justify-center"
+            aria-label={menuOpen ? "Close menu" : "Open menu"}
+            aria-expanded={menuOpen}
+          >
+            {menuOpen ? (
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
+            ) : (
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" /></svg>
+            )}
+          </button>
         </div>
+        {/* Mobile menu panel */}
+        {menuOpen && (
+          <div className="md:hidden absolute top-full left-0 right-0 bg-zinc-950/98 backdrop-blur-md border-b border-zinc-800/50 shadow-xl">
+            <div className="px-4 py-4 flex flex-col gap-1">
+              {NAV_LINKS.map(({ href, label }) => (
+                <a
+                  key={href}
+                  href={href}
+                  onClick={closeMenu}
+                  className="nav-link py-3 px-3 rounded-lg hover:bg-zinc-800/50 hover:text-amber-200 text-zinc-400 text-base min-h-[44px] flex items-center"
+                >
+                  {label}
+                </a>
+              ))}
+            </div>
+          </div>
+        )}
       </nav>
 
       {/* HERO */}
-      <section className="min-h-screen flex flex-col items-center justify-center text-center px-6 py-24 relative">
+      <section className="min-h-screen flex flex-col items-center justify-center text-center px-4 sm:px-6 py-20 sm:py-24 relative">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_80%_at_50%_30%,transparent_0%,rgba(2,6,24,0.9)_100%)] pointer-events-none" aria-hidden />
-        <div className="max-w-4xl relative z-10">
-          <p className="hero-badge animate-fade-in mb-6">
+        <div className="max-w-4xl relative z-10 w-full">
+          <p className="hero-badge animate-fade-in mb-4 sm:mb-6">
             SYS · AI ENGINEER
           </p>
-          <h1 className="text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight leading-[1.1] animate-fade-in-up">
+          <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight leading-[1.1] animate-fade-in-up">
             <span className="bg-gradient-to-r from-amber-200 via-orange-200 to-zinc-300 bg-clip-text text-transparent glow-text">
               Daksh Patel
             </span>
           </h1>
-          <h2 className="mt-8 text-xl md:text-2xl lg:text-3xl text-zinc-400 max-w-2xl mx-auto font-light leading-relaxed animate-fade-in-up animation-delay-200">
+          <h2 className="mt-6 sm:mt-8 text-lg sm:text-xl md:text-2xl lg:text-3xl text-zinc-400 max-w-2xl mx-auto font-light leading-relaxed animate-fade-in-up animation-delay-200 px-1">
             Building intelligent systems that <span className="text-amber-200/90">learn</span>, <span className="text-orange-200/90">adapt</span>, and <span className="text-amber-100/90">secure</span> the digital frontier.
           </h2>
-          <div className="mt-10 flex flex-wrap justify-center gap-2 md:gap-3 animate-fade-in-up animation-delay-300">
+          <div className="mt-8 sm:mt-10 flex flex-wrap justify-center gap-2 md:gap-3 animate-fade-in-up animation-delay-300">
             {["ML", "LLMs", "Computer Vision", "AI Agents", "Cybersecurity"].map((label) => (
               <span
                 key={label}
@@ -386,16 +426,16 @@ export default function Home() {
               </span>
             ))}
           </div>
-          <div className="mt-14 flex gap-4 justify-center animate-fade-in-up animation-delay-400">
+          <div className="mt-10 sm:mt-14 flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center animate-fade-in-up animation-delay-400">
             <a
               href="#projects"
-              className="px-8 py-4 rounded-lg border border-amber-500/35 bg-amber-500/10 text-amber-200 hover:bg-amber-500/20 hover:border-amber-400/50 hover:text-amber-100 transition-all text-lg font-medium font-mono"
+              className="px-6 sm:px-8 py-3.5 sm:py-4 rounded-lg border border-amber-500/35 bg-amber-500/10 text-amber-200 hover:bg-amber-500/20 hover:border-amber-400/50 hover:text-amber-100 transition-all text-base sm:text-lg font-medium font-mono text-center min-h-[48px] flex items-center justify-center"
             >
               View Work
             </a>
             <a
               href="#contact"
-              className="px-8 py-4 rounded-lg border border-zinc-500/40 bg-zinc-800/40 text-zinc-200 hover:bg-zinc-700/50 hover:border-amber-500/30 hover:text-amber-100 transition-all text-lg font-medium font-mono"
+              className="px-6 sm:px-8 py-3.5 sm:py-4 rounded-lg border border-zinc-500/40 bg-zinc-800/40 text-zinc-200 hover:bg-zinc-700/50 hover:border-amber-500/30 hover:text-amber-100 transition-all text-base sm:text-lg font-medium font-mono text-center min-h-[48px] flex items-center justify-center"
             >
               Get in Touch
             </a>
@@ -404,9 +444,9 @@ export default function Home() {
       </section>
 
       {/* ABOUT */}
-      <section id="about" className="min-h-screen flex items-center justify-center px-6 py-24">
-        <div className="max-w-3xl mx-auto">
-          <h2 className="text-4xl font-bold mb-10 text-center">
+      <section id="about" className="min-h-screen flex items-center justify-center px-4 sm:px-6 py-16 sm:py-24">
+        <div className="max-w-3xl mx-auto w-full">
+          <h2 className="text-3xl sm:text-4xl font-bold mb-8 sm:mb-10 text-center">
             <span className="section-badge font-mono">01.</span>{" "}
             <span className="section-title">About</span>
           </h2>
@@ -421,7 +461,7 @@ export default function Home() {
       </section>
 
       {/* SKILLS */}
-      <section id="skills" className="min-h-screen flex items-center justify-center px-6 py-24">
+      <section id="skills" className="min-h-screen flex items-center justify-center px-4 sm:px-6 py-16 sm:py-24">
         <div className="relative max-w-4xl mx-auto w-full">
           <div
             className="pointer-events-none absolute inset-x-0 top-16 bottom-8 mx-auto max-w-4xl rounded-3xl bg-gradient-to-b from-zinc-950/85 via-zinc-950/80 to-zinc-950/90 shadow-[0_0_60px_rgba(0,0,0,0.75)]"
@@ -451,13 +491,13 @@ export default function Home() {
       </section>
 
       {/* PROJECTS */}
-      <section id="projects" className="min-h-screen flex items-center justify-center px-6 py-24">
+      <section id="projects" className="min-h-screen flex items-center justify-center px-4 sm:px-6 py-16 sm:py-24">
         <div className="max-w-5xl mx-auto w-full">
-          <h2 className="text-4xl font-bold mb-12 text-center">
+          <h2 className="text-3xl sm:text-4xl font-bold mb-8 sm:mb-12 text-center">
             <span className="section-badge font-mono">03.</span>{" "}
             <span className="section-title">Projects</span>
           </h2>
-          <p className="text-zinc-300 text-center text-lg mb-16 max-w-2xl mx-auto font-medium">
+          <p className="text-zinc-300 text-center text-base sm:text-lg mb-10 sm:mb-16 max-w-2xl mx-auto font-medium px-1">
             Open-source projects from my{" "}
             <a href="https://github.com/DaxDS" target="_blank" rel="noopener noreferrer" className="text-zinc-300 hover:text-amber-200 font-medium transition-colors">
               GitHub
@@ -469,7 +509,7 @@ export default function Home() {
               {id === "ai-powered-cybersecurity" && (
                 <CyberAICopilotDemo />
               )}
-              <div className="grid md:grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
                 {GITHUB_PROJECTS.filter((p) => p.section === name).length > 0 ? (
                   GITHUB_PROJECTS.filter((p) => p.section === name).map((project) => (
                     <div
@@ -508,18 +548,18 @@ export default function Home() {
       </section>
 
       {/* CONTACT */}
-      <section id="contact" className="min-h-screen flex flex-col items-center justify-center px-6 py-24">
-        <h2 className="text-4xl font-bold mb-4 text-center">
+      <section id="contact" className="min-h-screen flex flex-col items-center justify-center px-4 sm:px-6 py-16 sm:py-24">
+        <h2 className="text-3xl sm:text-4xl font-bold mb-4 text-center">
           <span className="section-badge font-mono">04.</span>{" "}
             <span className="section-title">Contact</span>
         </h2>
-        <p className="text-zinc-300 mb-12 text-center max-w-md text-lg font-medium">
+        <p className="text-zinc-300 mb-8 sm:mb-12 text-center max-w-md text-base sm:text-lg font-medium px-1">
           Have a project in mind? Let&apos;s build something intelligent together.
         </p>
-        <div className="security-card p-8 rounded-xl flex flex-wrap justify-center gap-8 text-lg max-w-xl">
+        <div className="security-card p-6 sm:p-8 rounded-xl flex flex-col sm:flex-row flex-wrap justify-center items-center gap-4 sm:gap-8 text-base sm:text-lg max-w-xl w-full">
           <a
             href="mailto:dakshpate201199@gmail.com"
-            className="text-amber-200/90 hover:text-amber-100 font-mono transition-colors"
+            className="text-amber-200/90 hover:text-amber-100 font-mono transition-colors py-3 px-4 rounded-lg min-h-[48px] flex items-center justify-center text-center break-all"
           >
             dakshpate201199@gmail.com
           </a>
@@ -527,7 +567,7 @@ export default function Home() {
             href="https://github.com/DaxDS"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-zinc-400 hover:text-amber-200 transition-colors"
+            className="text-zinc-400 hover:text-amber-200 transition-colors py-3 px-4 rounded-lg min-h-[48px] flex items-center justify-center"
           >
             GitHub
           </a>
@@ -535,7 +575,7 @@ export default function Home() {
             href="https://www.linkedin.com/in/daxp/"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-zinc-400 hover:text-orange-200/90 transition-colors"
+            className="text-zinc-400 hover:text-orange-200/90 transition-colors py-3 px-4 rounded-lg min-h-[48px] flex items-center justify-center"
           >
             LinkedIn
           </a>
