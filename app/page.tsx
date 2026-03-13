@@ -218,28 +218,11 @@ export default function Home() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
-  // Always start at the top when opening the site (e.g. from LinkedIn on phone). Clear hash and
-  // scroll to top repeatedly so we win over in-app browser scroll restoration / hash application.
+  // Start at top when opening the site; gentle single run to avoid LinkedIn in-app browser closing.
   useEffect(() => {
     if (typeof window === "undefined") return;
     window.history.scrollRestoration = "manual";
-    const goTop = () => {
-      if (window.location.hash) {
-        window.history.replaceState(null, "", window.location.pathname + window.location.search);
-      }
-      window.scrollTo(0, 0);
-    };
-    goTop();
-    const t1 = setTimeout(goTop, 0);
-    const t2 = setTimeout(goTop, 100);
-    const t3 = setTimeout(goTop, 300);
-    const t4 = setTimeout(goTop, 600);
-    return () => {
-      clearTimeout(t1);
-      clearTimeout(t2);
-      clearTimeout(t3);
-      clearTimeout(t4);
-    };
+    window.scrollTo(0, 0);
   }, []);
 
   useEffect(() => {
@@ -285,7 +268,7 @@ export default function Home() {
             : "bg-transparent py-4 md:py-6 border-transparent"
         }`}
       >
-        <div className="w-full max-w-7xl mx-auto px-6 sm:px-8 flex justify-between items-center gap-4">
+        <div className="w-full max-w-7xl mx-auto px-4 sm:px-5 flex justify-between items-center gap-4">
           {/* Logo — left */}
           <a
             href="#"
