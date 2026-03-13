@@ -268,7 +268,7 @@ export default function Home() {
             : "bg-transparent py-4 md:py-6 border-transparent"
         }`}
       >
-        <div className="w-full max-w-7xl mx-auto px-4 sm:px-5 flex justify-between items-center gap-4">
+        <div className="w-full max-w-none px-3 sm:px-4 flex justify-between items-center gap-4">
           {/* Logo — left */}
           <a
             href="#"
@@ -481,13 +481,13 @@ export default function Home() {
         <p className="text-zinc-300 mb-8 sm:mb-12 text-center max-w-md text-base sm:text-lg font-medium px-1">
           Have a project in mind? Let&apos;s build something intelligent together.
         </p>
-        <div className="security-card px-4 sm:px-5 py-6 sm:py-8 rounded-xl flex flex-col justify-center items-stretch gap-10 text-base sm:text-lg max-w-xl w-full">
-          <div className="flex justify-between items-center w-full">
+        <div className="security-card p-6 sm:p-8 rounded-xl flex flex-col justify-center items-center gap-6 text-base sm:text-lg max-w-xl w-full">
+          <div className="flex flex-wrap justify-center items-center gap-4 sm:gap-8">
             <a
               href="https://www.linkedin.com/in/daxp/"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-zinc-400 hover:text-orange-200/90 transition-colors py-3 px-2 rounded-lg min-h-[48px] flex items-center justify-center"
+              className="text-zinc-400 hover:text-orange-200/90 transition-colors py-3 px-4 rounded-lg min-h-[48px] flex items-center justify-center"
             >
               LinkedIn
             </a>
@@ -495,7 +495,7 @@ export default function Home() {
               href="https://github.com/DaxDS"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-zinc-400 hover:text-amber-200 transition-colors py-3 px-2 rounded-lg min-h-[48px] flex items-center justify-center"
+              className="text-zinc-400 hover:text-amber-200 transition-colors py-3 px-4 rounded-lg min-h-[48px] flex items-center justify-center"
             >
               GitHub
             </a>
@@ -507,7 +507,7 @@ export default function Home() {
             dakshpate201199@gmail.com
           </a>
         </div>
-        <p className="mt-16 text-center text-white font-semibold text-sm tracking-wide font-mono">
+        <p className="mt-24 sm:mt-28 text-center text-white font-semibold text-sm tracking-wide font-mono">
           Designed & built by Daksh Patel
         </p>
       </section>
