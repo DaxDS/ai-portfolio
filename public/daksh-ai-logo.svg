@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 32" fill="none" aria-hidden="true">
+  <!-- stylized d -->
+  <path d="M8 6v20M8 14c0-4 3-8 8-8s8 4 8 8-3 8-8 8H8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- dot for .ai -->
+  <circle cx="30" cy="24" r="3" fill="currentColor"/>
+</svg>

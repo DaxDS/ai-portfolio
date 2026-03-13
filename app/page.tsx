@@ -273,10 +273,14 @@ export default function Home() {
           <a
             href="#"
             onClick={closeMenu}
-            className="shrink-0 inline-block px-3 py-1.5 rounded-lg text-lg sm:text-xl font-semibold tracking-tight font-mono text-amber-200/90 border border-transparent hover:border-amber-500/30 hover:bg-amber-500/5 transition-colors"
+            className="shrink-0 inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-amber-200/90 border border-transparent hover:border-amber-500/30 hover:bg-amber-500/5 transition-colors [&_svg]:shrink-0"
             aria-label="daksh.ai – back to top"
           >
-            daksh.ai
+            <svg className="w-6 h-6 sm:w-7 sm:h-7" viewBox="0 0 40 32" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+              <path d="M8 6v20M8 14c0-4 3-8 8-8s8 4 8 8-3 8-8 8H8" />
+              <circle cx="30" cy="24" r="3" fill="currentColor" />
+            </svg>
+            <span className="text-lg sm:text-xl font-semibold tracking-tight font-mono">daksh.ai</span>
           </a>
           {/* Desktop nav — right */}
           <div className="hidden md:flex flex-wrap gap-4 justify-end text-base font-mono font-semibold text-zinc-100">
@@ -478,16 +482,16 @@ export default function Home() {
           <span className="section-badge font-mono">04.</span>{" "}
             <span className="section-title">Contact</span>
         </h2>
-        <p className="text-zinc-300 mb-8 sm:mb-12 text-center max-w-md text-base sm:text-lg font-medium px-1">
+        <p className="text-zinc-300 mb-6 sm:mb-8 text-center max-w-md text-sm sm:text-base font-medium px-1">
           Have a project in mind? Let&apos;s build something intelligent together.
         </p>
-        <div className="security-card p-6 sm:p-8 rounded-xl flex flex-col justify-center items-center gap-6 text-base sm:text-lg max-w-xl w-full">
-          <div className="flex flex-wrap justify-center items-center gap-4 sm:gap-8">
+        <div className="security-card px-5 py-4 sm:px-6 sm:py-5 rounded-xl flex flex-col justify-center items-center gap-4 text-base max-w-md w-full">
+          <div className="flex flex-wrap justify-center items-center gap-3 sm:gap-5">
             <a
               href="https://www.linkedin.com/in/daxp/"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-zinc-400 hover:text-orange-200/90 transition-colors py-3 px-4 rounded-lg min-h-[48px] flex items-center justify-center"
+              className="text-zinc-400 hover:text-orange-200/90 transition-colors py-2 px-3 rounded-lg min-h-[40px] flex items-center justify-center text-sm sm:text-base"
             >
               LinkedIn
             </a>
@@ -495,19 +499,19 @@ export default function Home() {
               href="https://github.com/DaxDS"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-zinc-400 hover:text-amber-200 transition-colors py-3 px-4 rounded-lg min-h-[48px] flex items-center justify-center"
+              className="text-zinc-400 hover:text-amber-200 transition-colors py-2 px-3 rounded-lg min-h-[40px] flex items-center justify-center text-sm sm:text-base"
             >
               GitHub
             </a>
           </div>
           <a
             href="mailto:dakshpate201199@gmail.com"
-            className="text-amber-200/90 hover:text-amber-100 font-mono transition-colors py-3 px-4 rounded-lg min-h-[48px] flex items-center justify-center text-center break-all"
+            className="text-amber-200/90 hover:text-amber-100 font-mono transition-colors py-2 px-3 rounded-lg min-h-[40px] flex items-center justify-center text-center break-all text-sm sm:text-base"
           >
             dakshpate201199@gmail.com
           </a>
         </div>
-        <p className="mt-24 sm:mt-28 text-center text-white font-semibold text-sm tracking-wide font-mono">
+        <p className="mt-16 sm:mt-20 text-center text-white font-semibold text-sm tracking-wide font-mono">
           Designed & built by Daksh Patel
         </p>
       </section>
