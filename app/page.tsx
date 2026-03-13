@@ -285,23 +285,23 @@ export default function Home() {
             : "bg-transparent py-4 md:py-6 border-transparent"
         }`}
       >
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 flex justify-between items-center">
+        <div className="w-full max-w-7xl mx-auto px-6 sm:px-8 flex justify-between items-center gap-4">
           {/* Logo — left */}
           <a
             href="#"
             onClick={closeMenu}
-            className="inline-block px-3 py-1.5 rounded-lg text-lg sm:text-xl font-semibold tracking-tight font-mono text-amber-200/90 border border-transparent hover:border-amber-500/30 hover:bg-amber-500/5 transition-colors"
+            className="shrink-0 inline-block px-3 py-1.5 rounded-lg text-lg sm:text-xl font-semibold tracking-tight font-mono text-amber-200/90 border border-transparent hover:border-amber-500/30 hover:bg-amber-500/5 transition-colors"
             aria-label="daksh.ai – back to top"
           >
             daksh.ai
           </a>
           {/* Desktop nav — right */}
-          <div className="hidden md:flex flex-wrap gap-4 text-sm text-zinc-400">
+          <div className="hidden md:flex flex-wrap gap-4 justify-end text-base font-mono font-semibold text-zinc-100">
             {NAV_LINKS.map(({ href, label }) => (
               <a
                 key={href}
                 href={href}
-                className="nav-link px-3 py-1.5 rounded-lg font-mono font-medium hover:text-amber-200 hover:bg-zinc-900/60 border border-transparent hover:border-amber-500/30 transition-colors"
+                className="nav-link px-3 py-1.5 rounded-lg hover:text-amber-200 hover:bg-zinc-900/60 border border-transparent hover:border-amber-500/30 transition-colors"
               >
                 {label}
               </a>
@@ -331,7 +331,7 @@ export default function Home() {
                   key={href}
                   href={href}
                   onClick={closeMenu}
-                  className="nav-link py-3 px-3 rounded-lg hover:bg-zinc-800/50 hover:text-amber-200 text-zinc-400 text-base min-h-[44px] flex items-center font-mono font-medium"
+                  className="nav-link py-3 px-3 rounded-lg hover:bg-zinc-800/50 hover:text-amber-200 text-zinc-100 text-base min-h-[44px] flex items-center font-mono font-semibold"
                 >
                   {label}
                 </a>
