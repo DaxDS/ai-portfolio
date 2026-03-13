@@ -209,11 +209,12 @@ function CyberAICopilotDemo() {
 
 const NAV_LINKS = [
   { href: "#about", label: "About" },
-  { href: "#ai-agents-and-intelligent-systems", label: "AI Agents" },
-  { href: "#ai-powered-cybersecurity", label: "Cybersecurity" },
-  { href: "#ai-applications", label: "Applications" },
-  { href: "#computer-vision", label: "Vision" },
-  { href: "#ai-experiments-research", label: "Research" },
+  { href: "#skills", label: "Expertise" },
+  { href: "#projects", label: "Projects" },
+  ...PROJECT_SECTIONS.map(({ id, name }) => ({
+    href: `#${id}`,
+    label: name,
+  })),
   { href: "#contact", label: "Contact" },
 ];
 
@@ -289,11 +290,24 @@ export default function Home() {
         }`}
       >
         <div className="max-w-6xl mx-auto px-4 sm:px-6 flex justify-between items-center">
-          <a href="#" className="text-lg sm:text-xl font-semibold tracking-tight font-mono text-amber-200/90" onClick={closeMenu}>daksh.ai</a>
+          <a
+            href="#"
+            onClick={closeMenu}
+            className="inline-block px-3 py-1.5 rounded-lg text-lg sm:text-xl font-semibold tracking-tight font-mono text-amber-200/90 border border-transparent hover:border-amber-500/30 hover:bg-amber-500/5 transition-colors"
+            aria-label="daksh.ai – back to top"
+          >
+            daksh.ai
+          </a>
           {/* Desktop nav */}
-          <div className="hidden md:flex flex-wrap gap-6 text-sm text-zinc-400">
+          <div className="hidden md:flex flex-wrap gap-4 text-sm text-zinc-400">
             {NAV_LINKS.map(({ href, label }) => (
-              <a key={href} href={href} className="nav-link hover:text-amber-200 transition-colors">{label}</a>
+              <a
+                key={href}
+                href={href}
+                className="nav-link px-3 py-1.5 rounded-lg font-mono font-medium hover:text-amber-200 hover:bg-zinc-900/60 border border-transparent hover:border-amber-500/30 transition-colors"
+              >
+                {label}
+              </a>
             ))}
           </div>
           {/* Mobile menu button */}
@@ -320,7 +334,7 @@ export default function Home() {
                   key={href}
                   href={href}
                   onClick={closeMenu}
-                  className="nav-link py-3 px-3 rounded-lg hover:bg-zinc-800/50 hover:text-amber-200 text-zinc-400 text-base min-h-[44px] flex items-center"
+                  className="nav-link py-3 px-3 rounded-lg hover:bg-zinc-800/50 hover:text-amber-200 text-zinc-400 text-base min-h-[44px] flex items-center font-mono font-medium"
                 >
                   {label}
                 </a>
@@ -346,13 +360,14 @@ export default function Home() {
             Building intelligent systems that <span className="text-amber-200/90">learn</span>, <span className="text-orange-200/90">adapt</span>, and <span className="text-amber-100/90">secure</span> the digital frontier.
           </h2>
           <div className="mt-8 sm:mt-10 flex flex-wrap justify-center gap-2 md:gap-3 animate-fade-in-up animation-delay-300">
-            {["ML", "LLMs", "Computer Vision", "AI Agents", "Cybersecurity"].map((label) => (
-              <span
-                key={label}
-                className="px-4 py-2.5 rounded-lg bg-zinc-900/60 border border-amber-500/20 text-zinc-200 font-mono text-sm md:text-base font-medium backdrop-blur-md text-shadow-sm"
+            {PROJECT_SECTIONS.map(({ name, id }) => (
+              <a
+                key={id}
+                href={`#${id}`}
+                className="px-4 py-2.5 rounded-lg bg-zinc-900/60 border border-amber-500/20 text-zinc-200 font-mono text-sm md:text-base font-medium backdrop-blur-md text-shadow-sm hover:border-amber-400/60 hover:text-amber-100 transition-colors"
               >
-                {label}
-              </span>
+                {name}
+              </a>
             ))}
           </div>
           <div className="mt-10 sm:mt-14 flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center animate-fade-in-up animation-delay-400">
@@ -405,7 +420,8 @@ export default function Home() {
               {[
                 "Python", "PyTorch", "TensorFlow", "LangChain", "OpenAI",
                 "Computer Vision", "NLP", "LLMs", "RAG", "Vector DBs",
-                "Cybersecurity AI", "Anomaly Detection", "Agents", "Fine-tuning"
+                "Cybersecurity AI", "Anomaly Detection", "Agents", "Fine-tuning",
+                "MLOps"
               ].map((skill) => (
                 <div
                   key={skill}
@@ -485,28 +501,30 @@ export default function Home() {
         <p className="text-zinc-300 mb-8 sm:mb-12 text-center max-w-md text-base sm:text-lg font-medium px-1">
           Have a project in mind? Let&apos;s build something intelligent together.
         </p>
-        <div className="security-card p-6 sm:p-8 rounded-xl flex flex-col sm:flex-row flex-wrap justify-center items-center gap-4 sm:gap-8 text-base sm:text-lg max-w-xl w-full">
+        <div className="security-card p-6 sm:p-8 rounded-xl flex flex-col justify-center items-center gap-6 text-base sm:text-lg max-w-xl w-full">
+          <div className="flex flex-wrap justify-center items-center gap-4 sm:gap-8">
+            <a
+              href="https://www.linkedin.com/in/daxp/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-zinc-400 hover:text-orange-200/90 transition-colors py-3 px-4 rounded-lg min-h-[48px] flex items-center justify-center"
+            >
+              LinkedIn
+            </a>
+            <a
+              href="https://github.com/DaxDS"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-zinc-400 hover:text-amber-200 transition-colors py-3 px-4 rounded-lg min-h-[48px] flex items-center justify-center"
+            >
+              GitHub
+            </a>
+          </div>
           <a
             href="mailto:dakshpate201199@gmail.com"
             className="text-amber-200/90 hover:text-amber-100 font-mono transition-colors py-3 px-4 rounded-lg min-h-[48px] flex items-center justify-center text-center break-all"
           >
             dakshpate201199@gmail.com
-          </a>
-          <a
-            href="https://github.com/DaxDS"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-zinc-400 hover:text-amber-200 transition-colors py-3 px-4 rounded-lg min-h-[48px] flex items-center justify-center"
-          >
-            GitHub
-          </a>
-          <a
-            href="https://www.linkedin.com/in/daxp/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-zinc-400 hover:text-orange-200/90 transition-colors py-3 px-4 rounded-lg min-h-[48px] flex items-center justify-center"
-          >
-            LinkedIn
           </a>
         </div>
         <p className="mt-16 text-center text-white font-semibold text-sm tracking-wide font-mono">
