@@ -268,7 +268,7 @@ export default function Home() {
             : "bg-transparent py-4 md:py-6 border-transparent"
         }`}
       >
-        <div className="w-full max-w-none px-3 sm:px-4 flex justify-between items-center gap-4">
+        <div className="w-full max-w-none px-5 sm:px-6 flex justify-between items-center gap-4">
           {/* Logo — left */}
           <a
             href="#"
