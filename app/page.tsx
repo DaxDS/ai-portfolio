@@ -209,12 +209,7 @@ function CyberAICopilotDemo() {
 
 const NAV_LINKS = [
   { href: "#about", label: "About" },
-  { href: "#skills", label: "Expertise" },
   { href: "#projects", label: "Projects" },
-  ...PROJECT_SECTIONS.map(({ id, name }) => ({
-    href: `#${id}`,
-    label: name,
-  })),
   { href: "#contact", label: "Contact" },
 ];
 
@@ -290,16 +285,8 @@ export default function Home() {
         }`}
       >
         <div className="max-w-6xl mx-auto px-4 sm:px-6 flex justify-between items-center">
-          <a
-            href="#"
-            onClick={closeMenu}
-            className="inline-block px-3 py-1.5 rounded-lg text-lg sm:text-xl font-semibold tracking-tight font-mono text-amber-200/90 border border-transparent hover:border-amber-500/30 hover:bg-amber-500/5 transition-colors"
-            aria-label="daksh.ai – back to top"
-          >
-            daksh.ai
-          </a>
-          {/* Desktop nav */}
-          <div className="hidden md:flex flex-wrap gap-4 text-sm text-zinc-400">
+          {/* Desktop nav — left */}
+          <div className="hidden md:flex flex-wrap gap-4 text-sm text-zinc-400 order-first">
             {NAV_LINKS.map(({ href, label }) => (
               <a
                 key={href}
@@ -310,6 +297,15 @@ export default function Home() {
               </a>
             ))}
           </div>
+          {/* Logo — right */}
+          <a
+            href="#"
+            onClick={closeMenu}
+            className="inline-block px-3 py-1.5 rounded-lg text-lg sm:text-xl font-semibold tracking-tight font-mono text-amber-200/90 border border-transparent hover:border-amber-500/30 hover:bg-amber-500/5 transition-colors order-last"
+            aria-label="daksh.ai – back to top"
+          >
+            daksh.ai
+          </a>
           {/* Mobile menu button */}
           <button
             type="button"
