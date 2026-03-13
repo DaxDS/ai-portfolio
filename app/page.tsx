@@ -273,14 +273,12 @@ export default function Home() {
           <a
             href="#"
             onClick={closeMenu}
-            className="shrink-0 inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-amber-200/90 border border-transparent hover:border-amber-500/30 hover:bg-amber-500/5 transition-colors [&_svg]:shrink-0"
+            className="shrink-0 inline-flex items-center p-1.5 rounded-lg text-amber-200/90 border border-transparent hover:border-amber-500/30 hover:bg-amber-500/5 transition-colors"
             aria-label="daksh.ai – back to top"
           >
-            <svg className="w-6 h-6 sm:w-7 sm:h-7" viewBox="0 0 40 32" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-              <path d="M8 6v20M8 14c0-4 3-8 8-8s8 4 8 8-3 8-8 8H8" />
-              <circle cx="30" cy="24" r="3" fill="currentColor" />
+            <svg className="w-7 h-7 sm:w-8 sm:h-8" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
+              <path d="M12 4l8 16H4L12 4z" />
             </svg>
-            <span className="text-lg sm:text-xl font-semibold tracking-tight font-mono">daksh.ai</span>
           </a>
           {/* Desktop nav — right */}
           <div className="hidden md:flex flex-wrap gap-4 justify-end text-base font-mono font-semibold text-zinc-100">
