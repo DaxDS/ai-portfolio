@@ -221,20 +221,28 @@ export default function Home() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
-  // Always start at the top when opening the site (e.g. from LinkedIn) so the hero shows first.
-  // Clear any hash so the URL is clean and we don't jump to #projects or other sections on mobile.
+  // Always start at the top when opening the site (e.g. from LinkedIn on phone). Clear hash and
+  // scroll to top repeatedly so we win over in-app browser scroll restoration / hash application.
   useEffect(() => {
     if (typeof window === "undefined") return;
     window.history.scrollRestoration = "manual";
-    window.scrollTo(0, 0);
-    if (window.location.hash) {
-      window.history.replaceState(null, "", window.location.pathname + window.location.search);
-    }
-    // Run again after paint to override browser scroll restoration (e.g. on Vercel / in-app browsers)
-    const t = setTimeout(() => {
+    const goTop = () => {
+      if (window.location.hash) {
+        window.history.replaceState(null, "", window.location.pathname + window.location.search);
+      }
       window.scrollTo(0, 0);
-    }, 0);
-    return () => clearTimeout(t);
+    };
+    goTop();
+    const t1 = setTimeout(goTop, 0);
+    const t2 = setTimeout(goTop, 100);
+    const t3 = setTimeout(goTop, 300);
+    const t4 = setTimeout(goTop, 600);
+    return () => {
+      clearTimeout(t1);
+      clearTimeout(t2);
+      clearTimeout(t3);
+      clearTimeout(t4);
+    };
   }, []);
 
   useEffect(() => {
