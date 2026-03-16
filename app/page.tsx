@@ -93,7 +93,7 @@ const PROJECT_SECTIONS = [
     id: "ai-experiments-research",
     desc: "Model experiments, dataset analysis, and new architectures.",
   },
-];
+].filter((s, i, a) => a.findIndex((x) => x.id === s.id) === i);
 
 type ChatMessage = {
   role: "user" | "assistant";
@@ -428,20 +428,19 @@ export default function Home() {
               GitHub
             </a>
           </p>
-          {PROJECT_SECTIONS.map(({ name, id }) => (
+          {PROJECT_SECTIONS.filter(
+            (s) => s.id === "ai-powered-cybersecurity" || GITHUB_PROJECTS.some((p) => p.section === s.name)
+          ).map(({ name, id }) => (
             <div key={id} id={id} className="mb-16 scroll-mt-24">
               <h3 className="text-2xl font-semibold text-amber-200/90 mb-6 font-mono">{name}</h3>
               {id === "ai-powered-cybersecurity" && (
-                <>
-                  <div className="mb-8 rounded-xl overflow-hidden border border-amber-500/15 shadow-lg">
-                    <img
-                      src="/soc-investigation-console.png"
-                      alt="AI SOC Investigation Console — incident queue, investigation chat, timeline, IOCs, and threat intel lookup"
-                      className="w-full h-auto object-contain bg-zinc-950/60"
-                    />
-                  </div>
-                  <CyberAICopilotDemo />
-                </>
+                <div className="mb-8 rounded-xl overflow-hidden border border-amber-500/15 shadow-lg">
+                  <img
+                    src="/soc-investigation-console.png"
+                    alt="AI SOC Investigation Console — incident queue, investigation chat, timeline, IOCs, and threat intel lookup"
+                    className="w-full h-auto object-contain bg-zinc-950/60"
+                  />
+                </div>
               )}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
                 {GITHUB_PROJECTS.filter((p) => p.section === name).length > 0 ? (
