@@ -217,12 +217,26 @@ const NAV_LINKS = [
 export default function Home() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [canRender3D, setCanRender3D] = useState(false);
 
   // Start at top when opening the site; gentle single run to avoid LinkedIn in-app browser closing.
   useEffect(() => {
     if (typeof window === "undefined") return;
     window.history.scrollRestoration = "manual";
     window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    try {
+      const canvas = document.createElement("canvas");
+      const hasWebGL =
+        !!(window as any).WebGLRenderingContext &&
+        (!!canvas.getContext("webgl") || !!canvas.getContext("experimental-webgl"));
+      setCanRender3D(Boolean(hasWebGL));
+    } catch {
+      setCanRender3D(false);
+    }
   }, []);
 
   useEffect(() => {
@@ -250,13 +264,23 @@ export default function Home() {
       <div className="fixed inset-0 -z-10 bg-noise" aria-hidden />
       {/* 3D neural network — lazy-loaded with fallback so page always loads on desktop */}
       <div className="fixed inset-0 -z-10">
-        <CanvasErrorBoundary
-          fallback={
-            <div className="absolute inset-0 bg-gradient-to-b from-amber-950/10 via-transparent to-[#08081a]/90" aria-hidden />
-          }
-        >
-          <NeuralBackground />
-        </CanvasErrorBoundary>
+        {canRender3D ? (
+          <CanvasErrorBoundary
+            fallback={
+              <div
+                className="absolute inset-0 bg-gradient-to-b from-amber-950/10 via-transparent to-[#08081a]/90"
+                aria-hidden
+              />
+            }
+          >
+            <NeuralBackground />
+          </CanvasErrorBoundary>
+        ) : (
+          <div
+            className="absolute inset-0 bg-gradient-to-b from-amber-950/10 via-transparent to-[#08081a]/90"
+            aria-hidden
+          />
+        )}
       </div>
       <div className="fixed inset-0 -z-10 bg-gradient-to-b from-transparent via-transparent to-[#08081a]/80 pointer-events-none" />
 
