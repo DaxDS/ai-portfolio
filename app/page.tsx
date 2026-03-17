@@ -229,14 +229,26 @@ export default function Home() {
   useEffect(() => {
     if (typeof window === "undefined") return;
     try {
+      const params = new URLSearchParams(window.location.search);
+      const fx = params.get("fx"); // fx=0 disables, anything else enables if supported
+
       const canvas = document.createElement("canvas");
       const hasWebGL =
         !!(window as any).WebGLRenderingContext &&
         (!!canvas.getContext("webgl") || !!canvas.getContext("experimental-webgl"));
-      setCanRender3D(Boolean(hasWebGL));
+
+      const reducedMotion = window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches ?? false;
+      setCanRender3D(Boolean(hasWebGL) && !reducedMotion && fx !== "0");
     } catch {
       setCanRender3D(false);
     }
+  }, []);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const onLost = () => setCanRender3D(false);
+    window.addEventListener("neuralbg:webglcontextlost", onLost as EventListener);
+    return () => window.removeEventListener("neuralbg:webglcontextlost", onLost as EventListener);
   }, []);
 
   useEffect(() => {

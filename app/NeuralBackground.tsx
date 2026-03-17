@@ -1,13 +1,14 @@
 "use client";
 
-import { useRef, useMemo } from "react";
+import { useEffect, useRef, useMemo } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Points, PointMaterial } from "@react-three/drei";
 import * as THREE from "three";
 
-const NODE_COUNT = 420;
-const CONNECTIONS_PER_NODE = 5;
-const CONNECTION_MAX_DIST = 4.2;
+// Keep visuals, reduce GPU load for laptop/LinkedIn browsers.
+const NODE_COUNT = 280;
+const CONNECTIONS_PER_NODE = 4;
+const CONNECTION_MAX_DIST = 4.0;
 
 function getNodePositions(): Float32Array {
   const arr = new Float32Array(NODE_COUNT * 3);
@@ -102,11 +103,33 @@ function NeuralNetworkScene() {
 }
 
 export default function NeuralBackground() {
+  const lostOnceRef = useRef(false);
+
+  useEffect(() => {
+    // Reset between mounts.
+    lostOnceRef.current = false;
+  }, []);
+
   return (
     <Canvas
       camera={{ position: [0, 0, 12], fov: 55 }}
-      gl={{ alpha: true, antialias: true }}
-      dpr={[1, 2]}
+      gl={{
+        alpha: true,
+        antialias: false,
+        powerPreference: "high-performance",
+        failIfMajorPerformanceCaveat: true,
+      }}
+      dpr={[1, 1.25]}
+      onCreated={({ gl }) => {
+        const canvas = gl.domElement;
+        const onLost = (e: Event) => {
+          e.preventDefault?.();
+          if (lostOnceRef.current) return;
+          lostOnceRef.current = true;
+          window.dispatchEvent(new Event("neuralbg:webglcontextlost"));
+        };
+        canvas.addEventListener("webglcontextlost", onLost as any, { passive: false } as any);
+      }}
     >
       <NeuralNetworkScene />
     </Canvas>
