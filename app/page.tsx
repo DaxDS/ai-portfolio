@@ -21,6 +21,42 @@ class CanvasErrorBoundary extends Component<
 
 const GITHUB_PROJECTS = [
   {
+    section: "AI Applications",
+    title: "CareerOS",
+    desc: "AI job-search copilot for the Canadian market—NOC 2021/TEER intelligence, immigration-pathway analysis, LangGraph agent workflows, and human-in-the-loop review in a full-stack monorepo.",
+    repo: "career-os",
+    url: "https://github.com/DaxDS/career-os",
+    lang: "TypeScript / Python",
+    tags: ["LangGraph", "Next.js", "Supabase", "Agents"],
+  },
+  {
+    section: "AI Applications",
+    title: "Frontier",
+    desc: "Assistant-first personal dashboard—a daily brief where every number is live and source-labeled, and the AI names exactly one best action per day.",
+    repo: "frontier",
+    url: "https://github.com/DaxDS/frontier",
+    lang: "TypeScript / Next.js",
+    tags: ["AI Assistant", "Live Data", "Supabase"],
+  },
+  {
+    section: "AI Applications",
+    title: "BrandTax",
+    desc: "Scan any product with your camera—vision AI identifies it, live-web search finds cheaper dupes with real prices, and it generates a shareable Brand Tax card.",
+    repo: "brandtax",
+    url: "https://github.com/DaxDS/brandtax",
+    lang: "JavaScript / PWA",
+    tags: ["Vision AI", "Live Web Search", "PWA"],
+  },
+  {
+    section: "AI-Powered Cybersecurity",
+    title: "AI SOC Copilot",
+    desc: "Tier‑1 SOC copilot that triages alerts, builds investigation timelines, logs an audit trail, and generates investigation reports with an LLM-backed workflow.",
+    repo: "AI-soc-copilot",
+    url: "https://github.com/DaxDS/AI-soc-copilot",
+    lang: "TypeScript / Next.js",
+    tags: ["Cybersecurity", "LLM", "SOC Automation"],
+  },
+  {
     section: "AI Agents & Intelligent Systems",
     title: "Agentic Orchestrator",
     desc: "Agentic AI orchestration—coordinating multiple agents with tool use, planning, and intelligent workflows.",
@@ -29,49 +65,13 @@ const GITHUB_PROJECTS = [
     lang: "Python",
     tags: ["Agents", "Orchestration", "LLM"],
   },
-  {
-    section: "Computer Vision",
-    title: "Facial Detection",
-    desc: "Real-time face detection and recognition using computer vision and deep learning.",
-    repo: "Facial-detection",
-    url: "https://github.com/DaxDS/Facial-detection",
-    lang: "Python",
-    tags: ["Face Detection", "OpenCV", "Deep Learning"],
-  },
-  {
-    section: "Computer Vision",
-    title: "Volume Gesture",
-    desc: "Gesture-based volume control—hand tracking for touchless system control.",
-    repo: "volume-gesture",
-    url: "https://github.com/DaxDS/volume-gesture",
-    lang: "Python",
-    tags: ["Gesture Control", "Hand Tracking", "MediaPipe"],
-  },
-  {
-    section: "AI Applications",
-    title: "Sports Scribe",
-    desc: "AI-powered sports commentary generation—practical NLP for real-world content creation.",
-    repo: "sports-scribe",
-    url: "https://github.com/DaxDS/sports-scribe",
-    lang: "Python",
-    tags: ["NLP", "LLM", "Content Generation"],
-  },
-  {
-    section: "AI Experiments / Research",
-    title: "Projects",
-    desc: "Model experiments, dataset analysis, and testing new architectures.",
-    repo: "Projects",
-    url: "https://github.com/DaxDS/Projects",
-    lang: "Jupyter",
-    tags: ["Experiments", "Research", "Notebooks"],
-  },
 ];
 
 const PROJECT_SECTIONS = [
   {
-    name: "AI Agents & Intelligent Systems",
-    id: "ai-agents-and-intelligent-systems",
-    desc: "Agentic AI, orchestration, and intelligent workflows.",
+    name: "AI Applications",
+    id: "ai-applications",
+    desc: "Practical AI products that solve real problems.",
   },
   {
     name: "AI-Powered Cybersecurity",
@@ -79,19 +79,9 @@ const PROJECT_SECTIONS = [
     desc: "AI for detecting and preventing cyber threats.",
   },
   {
-    name: "AI Applications",
-    id: "ai-applications",
-    desc: "Practical AI systems that solve real problems.",
-  },
-  {
-    name: "Computer Vision",
-    id: "computer-vision",
-    desc: "Machines understanding images and video.",
-  },
-  {
-    name: "AI Experiments / Research",
-    id: "ai-experiments-research",
-    desc: "Model experiments, dataset analysis, and new architectures.",
+    name: "AI Agents & Intelligent Systems",
+    id: "ai-agents-and-intelligent-systems",
+    desc: "Agentic AI, orchestration, and intelligent workflows.",
   },
 ].filter((s, i, a) => a.findIndex((x) => x.id === s.id) === i);
 
@@ -469,15 +459,6 @@ export default function Home() {
           ).map(({ name, id }) => (
             <div key={id} id={id} className="mb-16 scroll-mt-24">
               <h3 className="text-2xl font-semibold text-amber-200/90 mb-6 font-mono">{name}</h3>
-              {id === "ai-powered-cybersecurity" && (
-                <div className="mb-8 rounded-xl overflow-hidden border border-amber-500/15 shadow-lg">
-                  <img
-                    src="/soc-investigation-console.png"
-                    alt="AI SOC Investigation Console — incident queue, investigation chat, timeline, IOCs, and threat intel lookup"
-                    className="w-full h-auto object-contain bg-zinc-950/60"
-                  />
-                </div>
-              )}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
                 {GITHUB_PROJECTS.filter((p) => p.section === name).length > 0 ? (
                   GITHUB_PROJECTS.filter((p) => p.section === name).map((project) => (
@@ -511,6 +492,15 @@ export default function Home() {
                   ))
                 ) : null}
               </div>
+              {id === "ai-powered-cybersecurity" && (
+                <div className="mt-8 rounded-xl overflow-hidden border border-amber-500/15 shadow-lg">
+                  <img
+                    src="/soc-investigation-console.png"
+                    alt="AI SOC Investigation Console — incident queue, investigation chat, timeline, IOCs, and threat intel lookup"
+                    className="w-full h-auto object-contain bg-zinc-950/60"
+                  />
+                </div>
+              )}
             </div>
           ))}
         </div>
