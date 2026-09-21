@@ -26,6 +26,7 @@ const GITHUB_PROJECTS = [
     desc: "AI job-search copilot for the Canadian market—NOC 2021/TEER intelligence, immigration-pathway analysis, LangGraph agent workflows, and human-in-the-loop review in a full-stack monorepo.",
     repo: "career-os",
     url: "https://github.com/DaxDS/career-os",
+    live: "https://career-os-daxds-projects.vercel.app",
     lang: "TypeScript / Python",
     tags: ["LangGraph", "Next.js", "Supabase", "Agents"],
   },
@@ -35,6 +36,7 @@ const GITHUB_PROJECTS = [
     desc: "Assistant-first personal dashboard—a daily brief where every number is live and source-labeled, and the AI names exactly one best action per day.",
     repo: "frontier",
     url: "https://github.com/DaxDS/frontier",
+    live: "",
     lang: "TypeScript / Next.js",
     tags: ["AI Assistant", "Live Data", "Supabase"],
   },
@@ -44,6 +46,7 @@ const GITHUB_PROJECTS = [
     desc: "Scan any product with your camera—vision AI identifies it, live-web search finds cheaper dupes with real prices, and it generates a shareable Brand Tax card.",
     repo: "brandtax",
     url: "https://github.com/DaxDS/brandtax",
+    live: "https://brandtax.vercel.app",
     lang: "JavaScript / PWA",
     tags: ["Vision AI", "Live Web Search", "PWA"],
   },
@@ -53,6 +56,7 @@ const GITHUB_PROJECTS = [
     desc: "Tier‑1 SOC copilot that triages alerts, builds investigation timelines, logs an audit trail, and generates investigation reports with an LLM-backed workflow.",
     repo: "AI-soc-copilot",
     url: "https://github.com/DaxDS/AI-soc-copilot",
+    live: "https://ai-soc-ui-iota.vercel.app",
     lang: "TypeScript / Next.js",
     tags: ["Cybersecurity", "LLM", "SOC Automation"],
   },
@@ -62,9 +66,27 @@ const GITHUB_PROJECTS = [
     desc: "Agentic AI orchestration—coordinating multiple agents with tool use, planning, and intelligent workflows.",
     repo: "agentic-orchestrator",
     url: "https://github.com/DaxDS/agentic-orchestrator",
+    live: "https://agentic-orchestrator-khaki.vercel.app",
     lang: "Python",
     tags: ["Agents", "Orchestration", "LLM"],
   },
+];
+
+const SKILLS: { name: string; usedIn: string[] }[] = [
+  { name: "Agents", usedIn: ["CareerOS", "Agentic Orchestrator"] },
+  { name: "LLMs", usedIn: ["AI SOC Copilot", "Agentic Orchestrator"] },
+  { name: "Cybersecurity AI", usedIn: ["AI SOC Copilot"] },
+  { name: "Computer Vision", usedIn: ["BrandTax"] },
+  { name: "LangChain / LangGraph", usedIn: ["CareerOS"] },
+  { name: "Python", usedIn: ["Agentic Orchestrator", "CareerOS"] },
+  { name: "RAG", usedIn: [] },
+  { name: "Vector DBs", usedIn: [] },
+  { name: "PyTorch", usedIn: [] },
+  { name: "TensorFlow", usedIn: [] },
+  { name: "NLP", usedIn: [] },
+  { name: "Anomaly Detection", usedIn: [] },
+  { name: "Fine-tuning", usedIn: [] },
+  { name: "MLOps", usedIn: [] },
 ];
 
 const PROJECT_SECTIONS = [
@@ -265,7 +287,7 @@ export default function Home() {
       <div className="fixed inset-0 -z-10 neural-grid-strong" />
       <div className="fixed inset-0 -z-10 bg-noise" aria-hidden />
       {/* 3D neural network — lazy-loaded with fallback so page always loads on desktop */}
-      <div className="fixed inset-0 -z-10">
+      <div className="fixed inset-0 -z-10 opacity-[0.55]">
         {canRender3D ? (
           <CanvasErrorBoundary
             fallback={
@@ -284,7 +306,7 @@ export default function Home() {
           />
         )}
       </div>
-      <div className="fixed inset-0 -z-10 bg-gradient-to-b from-transparent via-transparent to-[#08081a]/80 pointer-events-none" />
+      <div className="fixed inset-0 -z-10 bg-gradient-to-b from-transparent via-[#08081a]/35 to-[#08081a]/85 pointer-events-none" />
 
       {/* NAV */}
       <nav
@@ -394,7 +416,7 @@ export default function Home() {
       </section>
 
       {/* ABOUT */}
-      <section id="about" className="min-h-screen flex items-center justify-center px-4 sm:px-6 py-16 sm:py-24">
+      <section id="about" className="flex items-center justify-center px-4 sm:px-6 py-20 sm:py-28 scroll-mt-20">
         <div className="max-w-3xl mx-auto w-full">
           <h2 className="text-3xl sm:text-4xl font-bold mb-8 sm:mb-10 text-center">
             <span className="section-badge font-mono">01.</span>{" "}
@@ -411,7 +433,7 @@ export default function Home() {
       </section>
 
       {/* SKILLS */}
-      <section id="skills" className="min-h-screen flex items-center justify-center px-4 sm:px-6 py-16 sm:py-24">
+      <section id="skills" className="flex items-center justify-center px-4 sm:px-6 py-20 sm:py-28 scroll-mt-20">
         <div className="relative max-w-4xl mx-auto w-full">
           <div
             className="pointer-events-none absolute inset-x-0 top-16 bottom-8 mx-auto max-w-4xl rounded-3xl bg-gradient-to-b from-zinc-950/85 via-zinc-950/80 to-zinc-950/90 shadow-[0_0_60px_rgba(0,0,0,0.75)]"
@@ -422,18 +444,18 @@ export default function Home() {
               <span className="section-badge font-mono">02.</span>{" "}
               <span className="section-title">Expertise</span>
             </h2>
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-              {[
-                "Python", "PyTorch", "TensorFlow", "LangChain", "OpenAI",
-                "Computer Vision", "NLP", "LLMs", "RAG", "Vector DBs",
-                "Cybersecurity AI", "Anomaly Detection", "Agents", "Fine-tuning",
-                "MLOps"
-              ].map((skill) => (
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+              {SKILLS.map(({ name, usedIn }) => (
                 <div
-                  key={skill}
-                  className="security-card p-5 rounded-xl text-center group"
+                  key={name}
+                  className="security-card p-5 rounded-xl group flex flex-col gap-1.5"
                 >
-                  <span className="text-zinc-300 text-lg group-hover:text-amber-200/90 transition-colors">{skill}</span>
+                  <span className="text-zinc-300 text-lg group-hover:text-amber-200/90 transition-colors">{name}</span>
+                  {usedIn.length > 0 ? (
+                    <span className="text-xs font-mono text-amber-200/55 leading-relaxed">
+                      shipped in {usedIn.join(" \u00b7 ")}
+                    </span>
+                  ) : null}
                 </div>
               ))}
             </div>
@@ -442,14 +464,14 @@ export default function Home() {
       </section>
 
       {/* PROJECTS */}
-      <section id="projects" className="min-h-screen flex items-center justify-center px-4 sm:px-6 py-16 sm:py-24">
+      <section id="projects" className="flex items-center justify-center px-4 sm:px-6 py-20 sm:py-28 scroll-mt-20">
         <div className="max-w-5xl mx-auto w-full">
           <h2 className="text-3xl sm:text-4xl font-bold mb-8 sm:mb-12 text-center">
             <span className="section-badge font-mono">03.</span>{" "}
             <span className="section-title">Projects</span>
           </h2>
           <p className="text-zinc-300 text-center text-base sm:text-lg mb-10 sm:mb-16 max-w-2xl mx-auto font-medium px-1">
-            Open-source projects from my{" "}
+            Five systems I designed, built and shipped. Four are live—open one and try it. Source for all of them is on{" "}
             <a href="https://github.com/DaxDS" target="_blank" rel="noopener noreferrer" className="text-zinc-300 hover:text-amber-200 font-medium transition-colors">
               GitHub
             </a>
@@ -464,7 +486,7 @@ export default function Home() {
                   GITHUB_PROJECTS.filter((p) => p.section === name).map((project) => (
                     <div
                       key={project.repo}
-                      className="security-card block p-6 rounded-xl transition-all group"
+                      className="security-card p-6 rounded-xl transition-all group h-full flex flex-col"
                     >
                       <div className="flex items-start justify-between gap-4">
                         <h4 className="text-xl font-semibold text-zinc-300 group-hover:text-amber-200/90">{project.title}</h4>
@@ -478,16 +500,26 @@ export default function Home() {
                           </span>
                         ))}
                       </div>
-                      <p className="mt-3 text-sm text-zinc-500 group-hover:text-amber-200/90 font-mono">
+                      <div className="mt-auto pt-5 flex flex-wrap items-center gap-3">
+                        {project.live ? (
+                          <a
+                            href={project.live}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-1.5 text-sm font-mono px-3 py-1.5 rounded-md border border-amber-400/40 bg-amber-400/15 text-amber-100 hover:bg-amber-400/25 hover:border-amber-300/60 transition-colors focus:outline-none focus:ring-2 focus:ring-amber-500/50"
+                          >
+                            Live demo <span aria-hidden>↗</span>
+                          </a>
+                        ) : null}
                         <a
                           href={project.url}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="inline-flex items-center gap-1 hover:text-amber-200 transition-colors focus:outline-none focus:ring-2 focus:ring-amber-500/50 rounded"
+                          className="inline-flex items-center gap-1.5 text-sm font-mono px-3 py-1.5 rounded-md border border-zinc-600/50 text-zinc-300 hover:text-amber-200 hover:border-amber-400/40 transition-colors focus:outline-none focus:ring-2 focus:ring-amber-500/50"
                         >
                           View code <span aria-hidden>→</span>
                         </a>
-                      </p>
+                      </div>
                     </div>
                   ))
                 ) : null}
@@ -507,7 +539,7 @@ export default function Home() {
       </section>
 
       {/* CONTACT */}
-      <section id="contact" className="min-h-screen flex flex-col items-center justify-center px-4 sm:px-6 py-16 sm:py-24">
+      <section id="contact" className="flex flex-col items-center justify-center px-4 sm:px-6 py-20 sm:py-28 scroll-mt-20">
         <h2 className="text-3xl sm:text-4xl font-bold mb-4 text-center">
           <span className="section-badge font-mono">04.</span>{" "}
             <span className="section-title">Contact</span>
@@ -535,10 +567,10 @@ export default function Home() {
             </a>
           </div>
           <a
-            href="mailto:dakshpate201199@gmail.com"
+            href="mailto:dakshpatel201199@gmail.com"
             className="text-amber-200/90 hover:text-amber-100 font-mono transition-colors py-2 px-3 rounded-lg min-h-[40px] flex items-center justify-center text-center break-all text-sm sm:text-base"
           >
-            dakshpate201199@gmail.com
+            dakshpatel201199@gmail.com
           </a>
         </div>
         <p className="mt-16 sm:mt-20 text-center text-white font-semibold text-sm tracking-wide font-mono">
