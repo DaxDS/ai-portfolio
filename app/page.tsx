@@ -32,16 +32,6 @@ const GITHUB_PROJECTS = [
   },
   {
     section: "AI Applications",
-    title: "Frontier",
-    desc: "Assistant-first personal dashboard—a daily brief where every number is live and source-labeled, and the AI names exactly one best action per day.",
-    repo: "frontier",
-    url: "https://github.com/DaxDS/frontier",
-    live: "",
-    lang: "TypeScript / Next.js",
-    tags: ["AI Assistant", "Live Data", "Supabase"],
-  },
-  {
-    section: "AI Applications",
     title: "BrandTax",
     desc: "Scan any product with your camera—vision AI identifies it, live-web search finds cheaper dupes with real prices, and it generates a shareable Brand Tax card.",
     repo: "brandtax",
@@ -59,6 +49,16 @@ const GITHUB_PROJECTS = [
     live: "https://ai-soc-ui-iota.vercel.app",
     lang: "TypeScript / Next.js",
     tags: ["Cybersecurity", "LLM", "SOC Automation"],
+  },
+  {
+    section: "AI-Powered Cybersecurity",
+    title: "Agent Action Gate",
+    desc: "Evaluates a proposed AI-agent action against delegated permissions, instruction provenance, data sensitivity and policy—then blocks or allows it and writes an auditable decision record with the reasoning attached.",
+    repo: "agent-action-gate",
+    url: "https://github.com/DaxDS/agent-action-gate",
+    live: "https://agent-action-gate.vercel.app",
+    lang: "JavaScript / Vite",
+    tags: ["Prompt Injection", "Agent Security", "Policy Engine", "Audit Trail"],
   },
   {
     section: "AI Agents & Intelligent Systems",
@@ -471,7 +471,7 @@ export default function Home() {
             <span className="section-title">Projects</span>
           </h2>
           <p className="text-zinc-300 text-center text-base sm:text-lg mb-10 sm:mb-16 max-w-2xl mx-auto font-medium px-1">
-            Five systems I designed, built and shipped. Four are live—open one and try it. Source for all of them is on{" "}
+            Five systems I designed, built and shipped. Every one is live—open any of them and try it. Source is on{" "}
             <a href="https://github.com/DaxDS" target="_blank" rel="noopener noreferrer" className="text-zinc-300 hover:text-amber-200 font-medium transition-colors">
               GitHub
             </a>
